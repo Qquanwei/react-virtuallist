@@ -1,0 +1,17 @@
+stages:
+- install
+- test
+
+cache: # 配置cache, 避免每一个job需要install一次的麻烦，节省了时间
+  key: ${CI_COMMIT_SHA} # 以每一个commit为单位缓存文件
+  untracked: true # 缓存的是gitignore中忽略的全部文件
+
+install:
+  stage: install
+  script:
+  - npm install --registry http://rnpm.hz.netease.com
+
+test:
+  stage: test
+  script:
+  - npm run test
