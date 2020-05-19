@@ -25,11 +25,11 @@ function List({ list }) {
 
 参数
 
-| 名称      | 是否必传 | 解释                                                             |        |
-|-----------|----------|------------------------------------------------------------------|--------|
-| className | false    | className                                                        |        |
-| items     | true     | 列表数据                                                         |        |
-| render    | true     | 每个元素的渲染函数, 指纹 render: ({item, index}) => ReactElement |        |
-| getKey    | true     | 获取元素的唯一key, 指纹 getKey: ({ item, index}) => string       | number |
-| height    | true     | 375尺寸下元素高度，目前只支持等高渲染                            |        |
-| children  | false    | 当items为空时渲染children                                        |        |
+| 名称      | 是否必传 | 解释                                                                |        |
+|-----------|----------|---------------------------------------------------------------------|--------|
+| className | false    | className                                                           |        |
+| items     | true     | 列表数据                                                            |        |
+| render    | true     | 每个元素的渲染函数, 指纹 render: ({item, index}) => ReactElement    |        |
+| getKey    | true     | 获取元素的唯一key, 指纹 getKey: ({ item, index}) => string丨number          |  |
+| height    | true     | 375尺寸下元素高度，目前只支持等高渲染, 这里会自动换算不同设备宽高。 |        |
+| children  | false    | 当items为空时渲染children                                           |        |
