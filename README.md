@@ -1,12 +1,3 @@
-# @music/ct-smartlist
-
-> window上的列表组件
-
-[![pipeline status](https://g.hz.netease.com/NeteaseMusicUI/live-activity/ct-smartlist/badges/master/pipeline.svg)](https://g.hz.netease.com/NeteaseMusicUI/live-activity/ct-smartlist/commits/master)
-[![coverage report](https://g.hz.netease.com/NeteaseMusicUI/live-activity/ct-smartlist/badges/master/coverage.svg)](https://g.hz.netease.com/NeteaseMusicUI/live-activity/ct-smartlist/commits/master)
-[![nenpm](http://npm.hz.netease.com/badge/v/@music/ct-smartlist.svg)](http://npm.hz.netease.com/package/@music/ct-smartlist)
-[![nenpm](http://npm.hz.netease.com/badge/d/@music/ct-smartlist.svg)](http://npm.hz.netease.com/package/@music/ct-smartlist)
-
 ## 使用
 
 ![framework](https://p1.music.126.net/KBgcVD7mTldxw130unnDDw==/109951165000832035.png)
@@ -17,14 +8,14 @@ React 长列表性能优化，虚拟滚动。只初始化可视窗口的元素, 
 安装
 
 ```bash
-nenpm install @music/ct-smartlist --save
+nenpm install react-virtuallist --save
 ```
 
 使用
 
 ```js
 import React from 'react';
-import SmartList from '@music/ct-smartlist';
+import SmartList from 'react-virtuallist';
 
 function List({ list }) {
   return <SmartList items={list} render={renderItem} getKey={getKey} height={50} />
