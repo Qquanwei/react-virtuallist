@@ -1,0 +1,141 @@
+{
+  "name": "@music/ct-smartlist",
+  "version": "0.1.0",
+  "description": "window上的列表组件",
+  "author": "liquanwei <liquanwei@corp.netease.com>",
+  "aliasName": {
+    "zn": "lis",
+    "en": "list"
+  },
+  "groupName": "元素",
+  "category": "base",
+  "business": "",
+  "keywords": [
+    "music",
+    "common"
+  ],
+  "sideEffects": false,
+  "bugs": {
+    "url": "https://g.hz.netease.com/NeteaseMusicUI/live-activity/ct-smartlist/issues"
+  },
+  "homepage": "https://g.hz.netease.com/NeteaseMusicUI/live-activity/ct-smartlist",
+  "repository": {
+    "type": "git",
+    "url": "https://g.hz.netease.com/NeteaseMusicUI/live-activity/ct-smartlist.git"
+  },
+  "scripts": {
+    "dev": "cross-env BABEL_ENV=commonjs webpack-dev-server --port 7909 --host 0.0.0.0 --content-base demo/ --config demo/webpack.config.js --progress --hot --inline",
+    "clear": "rimraf ./dist/* && rimraf ./es/* && rimraf ./runtime/* && rimraf ./runtimees/*",
+    "build:demo": "cross-env BABEL_ENV=commonjs webpack -p --config demo/webpack.config.js --progress --env=production",
+    "js:commonjs": "cross-env BABEL_ENV=commonjs babel src/ --out-dir dist/",
+    "js:es": "cross-env BABEL_ENV=es babel src --out-dir es",
+    "js:runtime": "cross-env BABEL_ENV=commonjs NODE_ENV=runtime babel src --out-dir runtime",
+    "js:runtimees": "cross-env BABEL_ENV=es NODE_ENV=runtime babel src --out-dir runtimees",
+    "beforecommit": "npm run test:lint && elint lint commit",
+    "test:lint": "elint lint 'src/*.js' --fix",
+    "test": "npm run test:lint && jest",
+    "less:before": "replace-in-file --configFile=.replacelessbefore.js",
+    "less:after": "replace-in-file --configFile=.replacelessafter.js",
+    "css:copy": "copyfiles -f ./src/*.less ./dist",
+    "image:copy": "copyfiles -u 1 ./src/*.png './src/*.jpg' './src/*.webp' './src/*.gif' ./dist",
+    "css": "lessc ./src/index.less ./dist/index.css --autoprefix=\"IOS >= 9.0, Android >= 5.0\"",
+    "build": "npm run test && npm run build:demo && npm run clear && npm run js:commonjs && npm run js:es && npm run js:runtime && npm run js:runtimees && npm run less:before && npm run css && npm run less:after && npm run css:copy && npm run image:copy",
+    "prepublishOnly": "npm run build && mrc prepublish",
+    "postpublish": "mrc postpublish"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-decorators": "^7.0.0",
+    "@babel/plugin-proposal-do-expressions": "^7.0.0",
+    "@babel/plugin-proposal-export-default-from": "^7.0.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
+    "@babel/plugin-proposal-function-bind": "^7.0.0",
+    "@babel/plugin-proposal-function-sent": "^7.0.0",
+    "@babel/plugin-proposal-json-strings": "^7.0.0",
+    "@babel/plugin-proposal-logical-assignment-operators": "^7.0.0",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.0.0",
+    "@babel/plugin-proposal-numeric-separator": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.9.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.0.0",
+    "@babel/plugin-proposal-pipeline-operator": "^7.0.0",
+    "@babel/plugin-proposal-throw-expressions": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-syntax-import-meta": "^7.0.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.9.0",
+    "@babel/plugin-transform-runtime": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-react": "^7.8.3",
+    "@babel/register": "^7.8.3",
+    "@music/elint-preset-base": "^1.0.12",
+    "autoprefixer": "^9.7.4",
+    "babel-eslint": "^10.0.3",
+    "babel-jest": "^25.2.4",
+    "babel-loader": "^8.0.6",
+    "copyfiles": "^1.2.0",
+    "cross-env": "^5.0.5",
+    "css-loader": "^3.4.2",
+    "elint": "^1.8.3",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.7.1",
+    "eslint-loader": "^2.1.1",
+    "file-loader": "^6.0.0",
+    "jest": "^25.2.4",
+    "less": "^3.8.1",
+    "less-loader": "^4.0.5",
+    "less-plugin-autoprefix": "^1.5.1",
+    "less-plugin-inline-urls": "^1.2.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "postcss": "^7.0.2",
+    "postcss-less": "^2.0.0",
+    "postcss-loader": "^3.0.0",
+    "prop-types": "^15.6.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-test-renderer": "^16.0.0",
+    "replace-in-file": "^3.4.3",
+    "rimraf": "^2.6.2",
+    "url-loader": "^4.0.0",
+    "webpack": "^4.0.0",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.10.3",
+    "yargs": "^9.0.1"
+  },
+  "peerDependencies": {
+    "react": ">=16.0.0",
+    "react-dom": ">=16.0.0",
+    "prop-types": ">=15.6.0"
+  },
+  "engines": {
+    "node": ">= 6.2.0",
+    "npm": ">= 3.0.0"
+  },
+  "runtimenext:main": "runtimees/index.js",
+  "runtime:main": "runtime/index.js",
+  "jsnext:main": "es/index.js",
+  "main": "dist/index.js",
+  "jest": {
+    "collectCoverage": true,
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "testEnvironmentOptions": {
+      "url": "http://localhost"
+    },
+    "testMatch": [
+      "<rootDir>/test/*.js?(x)"
+    ],
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    }
+  },
+  "browserslist": [
+    "iOS >= 9",
+    "android >= 5.0"
+  ],
+  "dependencies": {
+    "intersection-observer": "^0.10.0"
+  }
+}

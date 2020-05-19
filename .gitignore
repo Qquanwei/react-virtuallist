@@ -1,0 +1,16 @@
+# Node
+npm-debug.log
+node_modules
+
+# Mac
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# WebStorm
+.idea/
+
+coverage/
+dist/
+es/

@@ -1,0 +1,7 @@
+# Ignore 
+/test
+/node_modules
+/dist
+/es
+/runtime
+/runtimees
