@@ -13,6 +13,8 @@
 
 React 长列表性能优化，虚拟滚动。只初始化可视窗口的元素, 减少js执行时间。
 
+内部使用IntersectionObserver实现，Android5, iOS10 已验证.
+
 
 安装
 
