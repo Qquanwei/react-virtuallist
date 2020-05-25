@@ -1,3 +1,7 @@
+# [2.0.0](https://g.hz.netease.com/NeteaseMusicUI/live-activity/ct-smartlist/compare/v1.0.0...v2.0.0) (2020-05-25)
+
+
+
 # [1.0.0](https://g.hz.netease.com/NeteaseMusicUI/live-activity/ct-smartlist/compare/b86548171d2337b7d44875c337b6d65b25e9f414...v1.0.0) (2020-05-25)
 
 
