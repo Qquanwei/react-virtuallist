@@ -31,9 +31,7 @@ const App = () => {
     const [list, setList] = useState(list1);
 
     const onClick = useCallback(() => {
-        setList(i => {
-            return i === list1 ? list2 : list1;
-        });
+        setList(i => (i === list1 ? list2 : list1));
     }, []);
 
     return (
