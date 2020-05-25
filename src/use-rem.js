@@ -2,8 +2,16 @@ import { useState, useEffect } from 'react';
 
 function pxToRem(px, maxWidth) {
     const width = (maxWidth === 0) ? window.innerWidth : Math.min(window.innerWidth, maxWidth);
-    return px / 375 * width;
+    if (typeof px === 'function') {
+        return (...args) => {
+            const realPx = px.call(null, ...args);
+            return realPx / 375 * width;
+        };
+    }
+    return () => px / 375 * width;
 }
+
+// px: number | func
 export default function useRem(px, maxWidth) {
     const [state, setState] = useState(() => pxToRem(px, maxWidth));
 
