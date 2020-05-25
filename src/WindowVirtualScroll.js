@@ -12,8 +12,13 @@ import 'intersection-observer';
 import useRem from './use-rem';
 
 // 向下滚动策略, 返回新元素offset
-function scrollBottomStrategy(itemHeightArray, numOfOneScreen, boundingClientRect, rootBounds) {
+function scrollBottomStrategy(
+    itemHeightArray,
+    getNumOfOneScreen,
+    boundingClientRect,
+    rootBounds) {
     return currentOffset => {
+        const numOfOneScreen = getNumOfOneScreen(currentOffset);
         const end = currentOffset + numOfOneScreen;
 
         if (end > itemHeightArray.length) {
@@ -38,8 +43,13 @@ function scrollBottomStrategy(itemHeightArray, numOfOneScreen, boundingClientRec
     }
 }
 
-function scrollTopStrategy(itemHeightArray, numOfOneScreen, boundingClientRect, rootBounds) {
+function scrollTopStrategy(
+    itemHeightArray,
+    getNumOfOneScreen,
+    boundingClientRect,
+    rootBounds) {
     return currentOffset => {
+        const numOfOneScreen = getNumOfOneScreen(currentOffset);
         const end = currentOffset + numOfOneScreen;
 
         if (end > itemHeightArray.length) {
@@ -49,14 +59,14 @@ function scrollTopStrategy(itemHeightArray, numOfOneScreen, boundingClientRect, 
         let sum = boundingClientRect.bottom;
         let step = 0;
 
-        if (sum <= rootBounds.bottom) {
+        if (sum < rootBounds.bottom) {
             return currentOffset;
         }
 
         for (let i = end;i > currentOffset; --i) {
             step += 1;
             sum -= itemHeightArray[i];
-            if (sum <= rootBounds.bottom) {
+            if (sum < rootBounds.bottom) {
                 return currentOffset - step;
             }
         }
@@ -78,7 +88,7 @@ function WindowVirtualScroll({
         return [ary, totalHeight];
     }, [height, items]);
 
-    const numOfOneScreen = useMemo(() => {
+    const numOfOneScreen = useCallback((currentIndex) => {
         let sum = 0;
         let i = currentIndex;
         for (; i < items.length; ++i) {
@@ -89,7 +99,7 @@ function WindowVirtualScroll({
             }
         }
         return i - currentIndex;
-    }, [itemHeightArray, currentIndex, items]);
+    }, [items, itemHeightArray]);
 
     const registerIntersectionObserver = useCallback(() => {
         const options = {
@@ -130,7 +140,7 @@ function WindowVirtualScroll({
     useEffect(registerIntersectionObserver, []);
 
     const begin = Math.max(currentIndex, 0);
-    const end = Math.min(currentIndex + numOfOneScreen, items.length);
+    const end = Math.min(currentIndex + numOfOneScreen(currentIndex), items.length);
 
     const paddingTop = (() => {
         let sum = 0;
