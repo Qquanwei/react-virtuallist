@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 
-function pxToRem(px) {
-    const width = Math.min(window.innerWidth, 600);
+function pxToRem(px, maxWidth) {
+    const width = (maxWidth === 0) ? window.innerWidth : Math.min(window.innerWidth, maxWidth);
     return px / 375 * width;
 }
-export default function useRem(px) {
-    const [state, setState] = useState(() => pxToRem(px));
+export default function useRem(px, maxWidth) {
+    const [state, setState] = useState(() => pxToRem(px, maxWidth));
 
     useEffect(() => {
-        const a = () => setState(pxToRem(px));
+        const a = () => setState(pxToRem(px, maxWidth));
         window.addEventListener('resize', a);
         return () => {
             window.removeEventListener('resize', a);

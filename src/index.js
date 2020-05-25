@@ -27,10 +27,10 @@ function scrollTopStrategy(itemHeight, boundingClientRect, rootBounds) {
 }
 
 function WindowVirtualScroll({
-    items, height: itemHeight, className, render, children, getKey
+    items, height: itemHeight, className, render, children, getKey, maxWidth
 }) {
     const virtualContainerRef = useRef();
-    const height = useRem(itemHeight);
+    const height = useRem(itemHeight, maxWidth);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [numOfOneScrren, setNumOfOneScreen] = useState(100000);
 
@@ -117,7 +117,12 @@ function WindowVirtualScroll({
     );
 }
 
+WindowVirtualScroll.defaultProps = {
+    maxWidth: 0
+};
+
 WindowVirtualScroll.propTypes = {
+    maxWidth: PropTypes.number,
     // ({ item }) => number | string
     getKey: PropTypes.func.isRequired,
     // 375 下高度px
@@ -128,6 +133,5 @@ WindowVirtualScroll.propTypes = {
     render: PropTypes.func.isRequired,
     children: PropTypes.element
 };
-
 
 export default memo(WindowVirtualScroll);
