@@ -19,7 +19,7 @@ function scrollBottomStrategy(
     rootBounds) {
     return currentOffset => {
         const numOfOneScreen = getNumOfOneScreen(currentOffset);
-        const end = currentOffset + numOfOneScreen;
+        const end = currentOffset + numOfOneScreen + 1;
 
         if (end > itemHeightArray.length) {
             return currentOffset;
@@ -28,14 +28,14 @@ function scrollBottomStrategy(
         let sum = boundingClientRect.bottom;
         let step = 0;
 
-        if (sum > rootBounds.bottom) {
+        if (sum >= rootBounds.bottom) {
             return currentOffset;
         }
 
         for (let i = end;i < itemHeightArray.length; ++i) {
             step += 1;
             sum += itemHeightArray[i];
-            if (sum > rootBounds.bottom) {
+            if (sum >= rootBounds.bottom) {
                 return currentOffset + step;
             }
         }
@@ -49,28 +49,19 @@ function scrollTopStrategy(
     boundingClientRect,
     rootBounds) {
     return currentOffset => {
-        const numOfOneScreen = getNumOfOneScreen(currentOffset);
-        const end = currentOffset + numOfOneScreen;
+        let sum = boundingClientRect.top;
 
-        if (end > itemHeightArray.length) {
+        if (sum <= rootBounds.top) {
             return currentOffset;
         }
 
-        let sum = boundingClientRect.bottom;
-        let step = 0;
-
-        if (sum < rootBounds.bottom) {
-            return currentOffset;
-        }
-
-        for (let i = end;i > currentOffset; --i) {
-            step += 1;
+        for (let i = currentOffset - 1;i >= 0; --i) {
             sum -= itemHeightArray[i];
-            if (sum < rootBounds.bottom) {
-                return currentOffset - step;
+            if (sum <= rootBounds.top) {
+                return i;
             }
         }
-        return currentOffset;
+        return 0;
     }
 }
 
@@ -139,8 +130,8 @@ function WindowVirtualScroll({
 
     useEffect(registerIntersectionObserver, []);
 
-    const begin = Math.max(currentIndex, 0);
-    const end = Math.min(currentIndex + numOfOneScreen(currentIndex), items.length);
+    const begin = Math.max(0, currentIndex - 1);
+    const end = currentIndex + numOfOneScreen(currentIndex) + 2;
 
     const paddingTop = (() => {
         let sum = 0;
