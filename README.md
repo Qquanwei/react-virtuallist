@@ -69,6 +69,8 @@ import { FoldableWindowVirtualScroll } from '@music/smartlist';
 ```
 
 FoldableWindowVirtualScroll 为 WindowVirtualScroll 的一个装饰器，其支持所有 WindowVirtualScroll 的参数，下面只列取特有的一些参数
+
+
 | 名称         | 是否必传 | 解释                     |
 |--------------|----------|--------------------------|
 | enableFold   | true     | 是否开启折叠             |
