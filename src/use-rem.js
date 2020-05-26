@@ -1,19 +1,27 @@
 import { useState, useEffect } from 'react';
 
-function pxToRem(px) {
-    const width = Math.min(window.innerWidth, 600);
-    return px / 375 * width;
+function pxToRem(px, maxWidth) {
+    const width = (maxWidth === 0) ? window.innerWidth : Math.min(window.innerWidth, maxWidth);
+    if (typeof px === 'function') {
+        return (...args) => {
+            const realPx = px.call(null, ...args);
+            return realPx / 375 * width;
+        };
+    }
+    return () => px / 375 * width;
 }
-export default function useRem(px) {
-    const [state, setState] = useState(() => pxToRem(px));
+
+// px: number | func
+export default function useRem(px, maxWidth) {
+    const [state, setState] = useState(() => pxToRem(px, maxWidth));
 
     useEffect(() => {
-        const a = () => setState(pxToRem(px));
+        const a = () => setState(() => pxToRem(px, maxWidth));
         window.addEventListener('resize', a);
         return () => {
             window.removeEventListener('resize', a);
         };
-    }, [px]);
+    }, [px, maxWidth]);
 
     return state;
 }
