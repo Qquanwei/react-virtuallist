@@ -1,6 +1,6 @@
 {
   "name": "@music/ct-smartlist",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "window上的列表组件",
   "author": "liquanwei <liquanwei@corp.netease.com>",
   "aliasName": {
