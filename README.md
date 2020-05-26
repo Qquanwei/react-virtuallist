@@ -36,14 +36,15 @@ function List({ list }) {
 
 参数
 
-| 名称      | 是否必传 | 解释                                                                          |
+
+| 名称      | 是否必传 | 解释                                                                          |   |
 |-----------|----------|-------------------------------------------------------------------------------|---|
 | className | false    | className                                                                     |   |
 | items     | true     | 列表数据                                                                      |   |
 | render    | true     | 每个元素的渲染函数, 指纹 render: ({item, index}) => ReactElement              |   |
 | getKey    | true     | 获取元素的唯一key, 指纹 getKey: ({ item, index}) => string丨number            |   |
 | height    | true     | 375尺寸下元素高度，目前只支持等高渲染, 这里会自动换算不同设备宽高。           |   |
-| height    | true     | 函数， ({ item, index}) => number                                                                             |   |
+| height    | true     | 函数， ({ item, index}) => number                                             |   |
 | children  | false    | 当items为空时渲染children                                                     |   |
 | maxWidth  | false    | 计算height的最大宽度, 如果使用屏幕宽度则为0, 如果最大宽度为600, 则手动设置600 |   |
 
