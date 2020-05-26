@@ -12,12 +12,7 @@
     "js:es": "cross-env BABEL_ENV=es babel src --out-dir es",
     "test:lint": "elint lint 'src/*.js' --fix",
     "test": "npm run test:lint && jest",
-    "less:before": "replace-in-file --configFile=.replacelessbefore.js",
-    "less:after": "replace-in-file --configFile=.replacelessafter.js",
-    "css:copy": "copyfiles -f ./src/*.less ./dist",
-    "image:copy": "copyfiles -u 1 ./src/*.png './src/*.jpg' './src/*.webp' './src/*.gif' ./dist",
-    "css": "lessc ./src/index.less ./dist/index.css --autoprefix=\"IOS >= 9.0, Android >= 5.0\"",
-    "build": "npm run test && npm run build:demo && npm run clear && npm run js:commonjs && npm run js:es && npm run js:runtime && npm run js:runtimees && npm run less:before && npm run css && npm run less:after && npm run css:copy && npm run image:copy",
+    "build": "npm run test && npm run clear && npm run js:commonjs && npm run js:es"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
