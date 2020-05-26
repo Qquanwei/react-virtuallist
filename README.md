@@ -1,4 +1,4 @@
-# @music/ct-smartlist
+## react-window-virtuallist
 
 > window上的列表组件
 
@@ -14,14 +14,14 @@ React 长列表性能优化，虚拟滚动。只初始化可视窗口的元素, 
 安装
 
 ```bash
-nenpm install @music/ct-smartlist --save
+nenpm install react-window-virtuallist --save
 ```
 
 使用
 
 ```js
 import React from 'react';
-import WindowVirtualScroll from '@music/ct-smartlist';
+import WindowVirtualScroll from 'react-window-virtuallist';
 
 function List({ list }) {
   return <WindowVirtualScroll items={list} render={renderItem} getKey={getKey} height={50} />

@@ -1,37 +1,15 @@
 {
-  "name": "@music/ct-smartlist",
+  "name": "react-window-virtuallist",
   "version": "0.1.0",
   "description": "window上的列表组件",
-  "author": "liquanwei <liquanwei@corp.netease.com>",
-  "aliasName": {
-    "zn": "lis",
-    "en": "list"
-  },
-  "groupName": "元素",
-  "category": "base",
+  "author": "liquanwei <quanwei9958@126.com>",
   "business": "",
-  "keywords": [
-    "music",
-    "common"
-  ],
   "sideEffects": false,
-  "bugs": {
-    "url": "https://g.hz.netease.com/NeteaseMusicUI/live-activity/ct-smartlist/issues"
-  },
-  "homepage": "https://g.hz.netease.com/NeteaseMusicUI/live-activity/ct-smartlist",
-  "repository": {
-    "type": "git",
-    "url": "https://g.hz.netease.com/NeteaseMusicUI/live-activity/ct-smartlist.git"
-  },
   "scripts": {
     "dev": "cross-env BABEL_ENV=commonjs webpack-dev-server --port 7909 --host 0.0.0.0 --content-base demo/ --config demo/webpack.config.js --progress --hot --inline",
     "clear": "rimraf ./dist/* && rimraf ./es/* && rimraf ./runtime/* && rimraf ./runtimees/*",
-    "build:demo": "cross-env BABEL_ENV=commonjs webpack -p --config demo/webpack.config.js --progress --env=production",
     "js:commonjs": "cross-env BABEL_ENV=commonjs babel src/ --out-dir dist/",
     "js:es": "cross-env BABEL_ENV=es babel src --out-dir es",
-    "js:runtime": "cross-env BABEL_ENV=commonjs NODE_ENV=runtime babel src --out-dir runtime",
-    "js:runtimees": "cross-env BABEL_ENV=es NODE_ENV=runtime babel src --out-dir runtimees",
-    "beforecommit": "npm run test:lint && elint lint commit",
     "test:lint": "elint lint 'src/*.js' --fix",
     "test": "npm run test:lint && jest",
     "less:before": "replace-in-file --configFile=.replacelessbefore.js",
@@ -40,8 +18,6 @@
     "image:copy": "copyfiles -u 1 ./src/*.png './src/*.jpg' './src/*.webp' './src/*.gif' ./dist",
     "css": "lessc ./src/index.less ./dist/index.css --autoprefix=\"IOS >= 9.0, Android >= 5.0\"",
     "build": "npm run test && npm run build:demo && npm run clear && npm run js:commonjs && npm run js:es && npm run js:runtime && npm run js:runtimees && npm run less:before && npm run css && npm run less:after && npm run css:copy && npm run image:copy",
-    "prepublishOnly": "npm run build && mrc prepublish",
-    "postpublish": "mrc postpublish"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -68,7 +44,6 @@
     "@babel/preset-env": "^7.8.4",
     "@babel/preset-react": "^7.8.3",
     "@babel/register": "^7.8.3",
-    "@music/elint-preset-base": "^1.0.12",
     "autoprefixer": "^9.7.4",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^25.2.4",
@@ -111,9 +86,6 @@
     "node": ">= 6.2.0",
     "npm": ">= 3.0.0"
   },
-  "runtimenext:main": "runtimees/index.js",
-  "runtime:main": "runtime/index.js",
-  "jsnext:main": "es/index.js",
   "main": "dist/index.js",
   "jest": {
     "collectCoverage": true,
@@ -132,8 +104,8 @@
     }
   },
   "browserslist": [
-    "iOS >= 9",
-    "android >= 5.0"
+    "iOS >= 10",
+    "android >= 5"
   ],
   "dependencies": {
     "intersection-observer": "^0.10.0"
