@@ -21,15 +21,6 @@ const config = {
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
-                loader: 'eslint-loader',
-                enforce: 'pre',
-                options: {
-                    fix: true
-                }
-            },
-            {
                 test: /\.(js|jsx)?$/,
                 exclude: /node_modules/,
                 use: [{
