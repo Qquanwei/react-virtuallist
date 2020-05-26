@@ -4,7 +4,6 @@ import React, {
     useEffect,
     useCallback,
     useState,
-    useLayoutEffect,
     useRef
 } from 'react';
 import PropTypes from 'prop-types';
@@ -16,8 +15,9 @@ function scrollBottomStrategy(
     itemHeightArray,
     getNumOfOneScreen,
     boundingClientRect,
-    rootBounds) {
-    return currentOffset => {
+    rootBounds
+) {
+    return (currentOffset) => {
         const numOfOneScreen = getNumOfOneScreen(currentOffset);
         const end = currentOffset + numOfOneScreen + 1;
 
@@ -32,7 +32,7 @@ function scrollBottomStrategy(
             return currentOffset;
         }
 
-        for (let i = end;i < itemHeightArray.length; ++i) {
+        for (let i = end; i < itemHeightArray.length; ++i) {
             step += 1;
             sum += itemHeightArray[i];
             if (sum >= rootBounds.bottom) {
@@ -40,29 +40,30 @@ function scrollBottomStrategy(
             }
         }
         return currentOffset;
-    }
+    };
 }
 
 function scrollTopStrategy(
     itemHeightArray,
     getNumOfOneScreen,
     boundingClientRect,
-    rootBounds) {
-    return currentOffset => {
+    rootBounds
+) {
+    return (currentOffset) => {
         let sum = boundingClientRect.top;
 
         if (sum <= rootBounds.top) {
             return currentOffset;
         }
 
-        for (let i = currentOffset - 1;i >= 0; --i) {
+        for (let i = currentOffset - 1; i >= 0; --i) {
             sum -= itemHeightArray[i];
             if (sum <= rootBounds.top) {
                 return i;
             }
         }
         return 0;
-    }
+    };
 }
 
 function WindowVirtualScroll({
@@ -73,15 +74,15 @@ function WindowVirtualScroll({
     const [currentIndex, setCurrentIndex] = useState(0);
 
     const [itemHeightArray, containerHeight] = useMemo(() => {
-        const ary = items.map(height);
+        const ary = items.map((item, index) => height({ item, index }));
         const totalHeight = ary.reduce((sum, i) => sum + i, 0);
 
         return [ary, totalHeight];
     }, [height, items]);
 
-    const numOfOneScreen = useCallback((currentIndex) => {
+    const numOfOneScreen = useCallback((index) => {
         let sum = 0;
-        let i = currentIndex;
+        let i = index;
         for (; i < items.length; ++i) {
             sum += itemHeightArray[i];
 
@@ -89,7 +90,7 @@ function WindowVirtualScroll({
                 break;
             }
         }
-        return i - currentIndex;
+        return i - index;
     }, [items, itemHeightArray]);
 
     const registerIntersectionObserver = useCallback(() => {
@@ -145,7 +146,7 @@ function WindowVirtualScroll({
         <div
             style={{
                 height: items.length ? containerHeight : 'auto',
-                paddingTop: paddingTop,
+                paddingTop,
                 boxSizing: 'border-box'
             }}
             className={className}>
@@ -155,7 +156,9 @@ function WindowVirtualScroll({
                         const realIndex = begin + index;
                         const params = { item: i };
                         return (
-                            <div style={{ height: itemHeightArray[realIndex] }} key={getKey(params)}>
+                            <div
+                                style={{ height: itemHeightArray[realIndex] }}
+                                key={getKey(params)}>
                                 { render(params) }
                             </div>
                         );
@@ -170,7 +173,9 @@ function WindowVirtualScroll({
 }
 
 WindowVirtualScroll.defaultProps = {
-    maxWidth: 0
+    maxWidth: 0,
+    className: '',
+    children: null
 };
 
 WindowVirtualScroll.propTypes = {

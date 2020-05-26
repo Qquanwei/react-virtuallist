@@ -16,12 +16,12 @@ export default function useRem(px, maxWidth) {
     const [state, setState] = useState(() => pxToRem(px, maxWidth));
 
     useEffect(() => {
-        const a = () => setState(pxToRem(px, maxWidth));
+        const a = () => setState(() => pxToRem(px, maxWidth));
         window.addEventListener('resize', a);
         return () => {
             window.removeEventListener('resize', a);
         };
-    }, [px]);
+    }, [px, maxWidth]);
 
     return state;
 }
