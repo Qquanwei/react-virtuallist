@@ -16,14 +16,14 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 var _WindowVirtualScroll = _interopRequireDefault(require("./WindowVirtualScroll"));
 
 /* eslint-disable-next-line */
-function decorateLog(fn) {
-  return function (obj) {
-    var value = fn.call(this, obj);
-    console.log('->', value);
-    return value;
-  };
-}
 
+/* function decorateLog(fn) {
+ *     return function (obj) {
+ *         const value = fn.call(this, obj);
+ *         console.log('->', value);
+ *         return value;
+ *     };
+ * } */
 function decorateWhenPropEq(prop, eq, origin, callback) {
   return function (obj) {
     if (obj[prop] === eq) {
