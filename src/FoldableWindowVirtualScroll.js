@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import WindowVirtualScroll from './WindowVirtualScroll';
 
 /* eslint-disable-next-line */
-function decorateLog(fn) {
-    return function (obj) {
-        const value = fn.call(this, obj);
-        console.log('->', value);
-        return value;
-    };
-}
+/* function decorateLog(fn) {
+ *     return function (obj) {
+ *         const value = fn.call(this, obj);
+ *         console.log('->', value);
+ *         return value;
+ *     };
+ * } */
 
 function decorateWhenPropEq(prop, eq, origin, callback) {
     return function (obj) {
